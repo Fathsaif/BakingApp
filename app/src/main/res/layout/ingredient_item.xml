@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/default_16"
+    android:paddingTop="@dimen/default_16">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ingredient"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                />
+
+    <TextView
+        android:id="@+id/ingredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_16"
+        android:text="afafasgdthgfadsasda"
+        android:layout_marginTop="@dimen/default_8"
+        android:textAppearance="@style/TextAppearance.AppCompat"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quantity"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        />
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_16"
+        android:text="afafasgdthgfadsasda"
+        android:layout_marginTop="@dimen/default_8"
+        android:textAppearance="@style/TextAppearance.AppCompat"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/measure"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        />
+
+    <TextView
+        android:id="@+id/measure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_16"
+        android:text="afafasgdthgfadsasda"
+        android:layout_marginTop="@dimen/default_8"
+        android:textAppearance="@style/TextAppearance.AppCompat"/>
+
+
+</LinearLayout>

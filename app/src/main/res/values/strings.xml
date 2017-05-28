@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BakingApp</string>
+    <string name="recipe_name">Default Recipe Name</string>
+    <string name="recipe_ingredients">Recipe Ingredients</string>
+    <string name="recipe_steps">Recipe Steps</string>
+    <string name="ingredient">Ingredient:</string>
+    <string name="quantity">Quantity:</string>
+    <string name="measure">Measure:</string>
+</resources>
