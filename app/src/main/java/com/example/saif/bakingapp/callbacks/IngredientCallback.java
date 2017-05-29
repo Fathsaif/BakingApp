@@ -10,5 +10,5 @@ import java.util.List;
  */
 
 public interface IngredientCallback {
-    void getIngredientBtn(int position, List<Recipe> recipeList);
+    void getIngredientBtn(List<Ingredient> ingredients);
 }

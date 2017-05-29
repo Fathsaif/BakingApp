@@ -43,8 +43,9 @@ public class IngredientsListFragment extends Fragment implements IngredientCallb
     }
 
     @Override
-    public void getIngredientBtn(int position,List<Recipe> recipeList) {
-        mIngredientAdapter.setData(recipeList.get(position).getIngredients());
+    public void getIngredientBtn(List<Ingredient> ingredients) {
+        mIngredientAdapter.setData(ingredients);
+        Toast.makeText(getContext(),"fragment",Toast.LENGTH_LONG).show();
 
     }
 }

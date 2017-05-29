@@ -63,7 +63,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
             @Override
             public void onClick(View v) {
 
-                mCallback.getIngredientBtn(position ,recipes);
+                mCallback.getIngredientBtn(recipes.get(position).getIngredients());
                 Toast.makeText(mContext,""+position,Toast.LENGTH_LONG).show();
             }
         });

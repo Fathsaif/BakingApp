@@ -6,13 +6,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
-
 import com.example.saif.bakingapp.adapters.RecipeListAdapter;
 import com.example.saif.bakingapp.callbacks.IngredientCallback;
 import com.example.saif.bakingapp.model.Ingredient;
 import com.example.saif.bakingapp.model.Recipe;
 import com.example.saif.bakingapp.rest.Services;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -40,7 +38,10 @@ public class MainActivity extends AppCompatActivity implements IngredientCallbac
     }
 
     @Override
-    public void getIngredientBtn(int p,List<Recipe> recipeList) {
+    public void getIngredientBtn(List<Ingredient> ingredients) {
         startIngredientActivity();
+        Toast.makeText(getApplicationContext(),"main",Toast.LENGTH_LONG).show();
+
+
     }
 }
