@@ -22,6 +22,7 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
     List<Ingredient> mIngredients;
     Context mContext;
 
+
     public IngredientListAdapter(Context context,List<Ingredient> ingredients){
         mContext = context;
         mIngredients = ingredients;
@@ -31,18 +32,16 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.ingredient_item,parent,false);
-        Toast.makeText(mContext,"adapter",Toast.LENGTH_LONG).show();
-
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Ingredient ingredient = mIngredients.get(position);
-        Toast.makeText(mContext,"allal8999",Toast.LENGTH_LONG).show();
 
+        Ingredient ingredient = mIngredients.get(position);
         holder.ingredientTv.setText(ingredient.getIngredient());
-        holder.quantity.setText((int) ingredient.getQuantity());
+        String q = String.valueOf(ingredient.getQuantity());
+        holder.quantity.setText(q);
         holder.measure.setText(ingredient.getMeasure());
 
     }
@@ -56,18 +55,19 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
         TextView ingredientTv;
         TextView measure;
         TextView quantity;
+        View view;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ingredientTv = (TextView) itemView.findViewById(R.id.ingredient);
             measure = (TextView) itemView.findViewById(R.id.measure);
             quantity = (TextView) itemView.findViewById(R.id.quantity);
+            view = itemView.findViewById(R.id.divider);
         }
     }
     public void setData (List<Ingredient> ingredients){
 
         mIngredients = ingredients;
-        Toast.makeText(mContext,mIngredients.size(),Toast.LENGTH_LONG).show();
         notifyDataSetChanged();
     }
 }

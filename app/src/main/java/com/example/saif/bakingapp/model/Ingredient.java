@@ -4,19 +4,39 @@ package com.example.saif.bakingapp.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Parcelable.Creator;
+
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
-
-public class Ingredient implements Parcelable
+@Table(name = "Ingredients")
+public class Ingredient extends Model implements Parcelable
 {
+
+    @Column(name = "Quantity")
     @SerializedName("quantity")
+    @Expose
     private double quantity;
+
+    @Column(name = "Measure")
     @SerializedName("measure")
+    @Expose
     private String measure;
+
+    @Column(name = "Ingredient")
     @SerializedName("ingredient")
+    @Expose
     private String ingredient;
+
+    @Column(name = "Recipe")
+    @Expose
+    public Recipe recipe;
+
     public final static Parcelable.Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
 
 

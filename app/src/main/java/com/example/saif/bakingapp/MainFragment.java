@@ -1,16 +1,20 @@
 package com.example.saif.bakingapp;
 
+import android.database.Cursor;
 import android.support.v4.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RawRes;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.activeandroid.query.Select;
 import com.example.saif.bakingapp.adapters.RecipeListAdapter;
 import com.example.saif.bakingapp.callbacks.IngredientCallback;
 import com.example.saif.bakingapp.model.Ingredient;
@@ -30,7 +34,7 @@ import static com.example.saif.bakingapp.rest.ApiClient.getClient;
  * Created by Mosaad on 18/05/2017.
  */
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment{
     RecipeListAdapter mListAdapter;
     List<Recipe> mRecipes;
     RecyclerView recyclerView;
@@ -46,7 +50,8 @@ public class MainFragment extends Fragment {
         recyclerView.setLayoutManager(vLayoutManager);
         mListAdapter = new RecipeListAdapter(getActivity(),mRecipes, (IngredientCallback) getActivity());
         recyclerView.setAdapter(mListAdapter);
-        new FetchRecipeTask().execute();
+        mListAdapter.setRecipes(getmRecipes());
+       // new FetchRecipeTask().execute();
 
         return rootView;
 
@@ -55,32 +60,9 @@ public class MainFragment extends Fragment {
 
     }
 
-
-
-    public class FetchRecipeTask extends AsyncTask<Void,Void,List<Recipe>> {
-
-        @Override
-        protected List<Recipe> doInBackground(Void... params) {
-            Retrofit retrofit = getClient();
-            Services services = retrofit.create(Services.class);
-            Call<List<Recipe>> recipeCall = services.discoverRecipes();
-            try {
-                Response<List<Recipe>> recipeResponse = recipeCall.execute();
-                List<Recipe> recipes = (List<Recipe>) recipeResponse.body();
-                return recipes;
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(List<Recipe> recipeList) {
-            super.onPostExecute(recipeList);
-            mListAdapter.setRecipes(recipeList);
-            Ingredient ingredient = new Ingredient();
-
-        }
+        public List<Recipe> getmRecipes (){
+        return new Select().from(Recipe.class).orderBy("Recipe_id ASC").execute();
     }
+
+
 }

@@ -32,6 +32,9 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
 
     onRecipeClick mClick;
 
+    public RecipeListAdapter(IngredientCallback callback){
+        mCallback = callback;
+    }
     public RecipeListAdapter(Context context,List<Recipe> recipeList,IngredientCallback callback){
         mContext =context;
         recipes = recipeList;
@@ -63,14 +66,13 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
             @Override
             public void onClick(View v) {
 
-                mCallback.getIngredientBtn(recipes.get(position).getIngredients());
+                mCallback.getIngredientBtn(recipes.get(position).getId());
+                mCallback.startActivity();
                 Toast.makeText(mContext,""+position,Toast.LENGTH_LONG).show();
             }
         });
 
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -100,8 +102,14 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
         }
 
 
+    public void setLisenter (IngredientCallback lisenter){
+        mCallback = lisenter;
+
+    }
+
     public void setRecipes (List<Recipe> mRecipes){
         recipes = mRecipes;
         notifyDataSetChanged();
+
     }
 }

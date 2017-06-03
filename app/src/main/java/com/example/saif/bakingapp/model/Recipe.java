@@ -7,25 +7,57 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Parcelable.Creator;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.example.saif.bakingapp.model.Ingredient;
 import com.example.saif.bakingapp.model.Step;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-public class Recipe implements Parcelable
+@Table(name = "Recipes")
+public class Recipe extends Model implements Parcelable
 {
 
+    @Column(name = "Recipe_id")
     @SerializedName("id")
-    private Integer id;
+    @Expose
+    private Long id;
+
+    @Column(name = "Name")
     @SerializedName("name")
+    @Expose
     private String name;
+
     @SerializedName("ingredients")
-    private List<Ingredient> ingredients = new ArrayList<>();
+    @Expose
+    public List<Ingredient> ingredientList = new ArrayList<>();
+
+    public List<Ingredient> ingredients (){
+        return getMany(Ingredient.class,"Recipe");
+    }
+
     @SerializedName("steps")
-    private List<Step> steps = new ArrayList<>();
+    @Expose
+    public List<Step> steps = new ArrayList<>();
+
+    public List<Step> steps1(){
+        return getMany(Step.class,"Recipe");
+    }
+    @Column(name = "Servings")
     @SerializedName("servings")
+    @Expose
     private Integer servings;
+
+    @Column(name = "Image")
     @SerializedName("image")
+    @Expose
     private String image;
+
+    public Recipe(){
+        super();
+    }
     public final static Parcelable.Creator<Recipe> CREATOR = new Creator<Recipe>() {
 
 
@@ -34,9 +66,9 @@ public class Recipe implements Parcelable
         })
         public Recipe createFromParcel(Parcel in) {
             Recipe instance = new Recipe();
-            instance.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
+            instance.id = ((Long) in.readValue((Integer.class.getClassLoader())));
             instance.name = ((String) in.readValue((String.class.getClassLoader())));
-            in.readList(instance.ingredients, (Ingredient.class.getClassLoader()));
+            in.readList(instance.ingredientList, (Ingredient.class.getClassLoader()));
             in.readList(instance.steps, (Step.class.getClassLoader()));
             instance.servings = ((Integer) in.readValue((Integer.class.getClassLoader())));
             instance.image = ((String) in.readValue((String.class.getClassLoader())));
@@ -50,11 +82,11 @@ public class Recipe implements Parcelable
     }
     ;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -67,11 +99,11 @@ public class Recipe implements Parcelable
     }
 
     public List<Ingredient> getIngredients() {
-        return ingredients;
+        return ingredientList;
     }
 
     public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+        this.ingredientList = ingredients;
     }
 
     public List<Step> getSteps() {
@@ -101,7 +133,7 @@ public class Recipe implements Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(id);
         dest.writeValue(name);
-        dest.writeList(ingredients);
+        dest.writeList(ingredientList);
         dest.writeList(steps);
         dest.writeValue(servings);
         dest.writeValue(image);

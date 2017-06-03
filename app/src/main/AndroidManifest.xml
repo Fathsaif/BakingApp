@@ -3,12 +3,22 @@
     package="com.example.saif.bakingapp">
 <uses-permission android:name="android.permission.INTERNET"/>
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data android:name="AA_DB_NAME" android:value="Baking.db" />
+        <meta-data android:name="AA_DB_VERSION" android:value="11" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.example.saif.bakingapp.model.Ingredient,
+            com.example.saif.bakingapp.model.Recipe,
+            com.example.saif.bakingapp.model.Step" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -10,5 +10,6 @@ import java.util.List;
  */
 
 public interface IngredientCallback {
-    void getIngredientBtn(List<Ingredient> ingredients);
+    void  startActivity ();
+    void getIngredientBtn(Long recipeId);
 }
