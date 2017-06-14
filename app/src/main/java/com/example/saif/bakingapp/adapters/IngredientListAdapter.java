@@ -15,7 +15,7 @@ import com.example.saif.bakingapp.model.Ingredient;
 import java.util.List;
 
 /**
- * Created by Mosaad on 24/05/2017.
+ * Created by Saif on 24/05/2017.
  */
 
 public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAdapter.ViewHolder> {
@@ -62,7 +62,6 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
             ingredientTv = (TextView) itemView.findViewById(R.id.ingredient);
             measure = (TextView) itemView.findViewById(R.id.measure);
             quantity = (TextView) itemView.findViewById(R.id.quantity);
-            view = itemView.findViewById(R.id.divider);
         }
     }
     public void setData (List<Ingredient> ingredients){

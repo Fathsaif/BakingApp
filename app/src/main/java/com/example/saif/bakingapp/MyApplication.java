@@ -6,7 +6,7 @@ import android.content.res.Configuration;
 import com.activeandroid.ActiveAndroid;
 
 /**
- * Created by Mosaad on 01/06/2017.
+ * Created by Saif on 01/06/2017.
  */
 
 public class MyApplication extends Application {

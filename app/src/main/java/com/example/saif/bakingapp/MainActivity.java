@@ -1,33 +1,30 @@
 package com.example.saif.bakingapp;
 
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.activeandroid.query.Select;
-import com.example.saif.bakingapp.adapters.RecipeListAdapter;
+import com.example.saif.bakingapp.Utils.Constants;
+import com.example.saif.bakingapp.Utils.Global;
 import com.example.saif.bakingapp.callbacks.IngredientCallback;
+import com.example.saif.bakingapp.callbacks.StepCallback;
 import com.example.saif.bakingapp.model.Ingredient;
 import com.example.saif.bakingapp.model.Recipe;
 import com.example.saif.bakingapp.model.Step;
 import com.example.saif.bakingapp.rest.ApiClient;
-import com.example.saif.bakingapp.rest.Services;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
-import static com.example.saif.bakingapp.rest.ApiClient.getClient;
-import static java.lang.Math.toIntExact;
-
-public class MainActivity extends AppCompatActivity implements IngredientCallback {
+public class MainActivity extends AppCompatActivity implements IngredientCallback,StepCallback {
     FragmentManager fragmentManager;
     private Call<List<Recipe>> recipesCall;
 
@@ -52,11 +49,7 @@ public class MainActivity extends AppCompatActivity implements IngredientCallbac
                     for (Recipe recipe : recipes) {
                         recipe.save();
                         Toast.makeText(getApplicationContext(), "sql = "+recipe.getId(), Toast.LENGTH_LONG).show();
-                        List<Ingredient> ingredients = recipe.getIngredients();
-                        List<Step> steps = recipe.getSteps();
-                        //Ingredient ingredient = ingredients.get( (int) (long) recipe.getId()-1);
-                       // Toast.makeText(getApplicationContext(), "steps = " +steps.size() +" ingred = " +ingredients.size(), Toast.LENGTH_LONG).show();
-                        //ingredient.save();
+
                         for (Ingredient ingredient : recipe.getIngredients()) {
                             Toast.makeText(getApplicationContext(), "ingred = " +ingredient.getId(), Toast.LENGTH_LONG).show();
                             ingredient.recipe = recipe;
@@ -84,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements IngredientCallbac
         startActivity(intent);
     }
 
+    public void startStepActivity(Bundle b){
+        Intent intent = new Intent(this,StepListActivity.class);
+        intent.putExtras(b);
+        startActivity(intent);
+    }
     @Override
     public void startActivity() {
         startIngredientActivity();
@@ -96,4 +94,15 @@ public class MainActivity extends AppCompatActivity implements IngredientCallbac
         Global.setgId(recipeId);
     }
 
-   }
+    @Override
+    public void getStepBtn(Long recipeId) {
+        List<Step> steps = new Select().from(Step.class)
+                .where("Recipe = ?", recipeId)
+                .execute();
+        Bundle b = new Bundle();
+        b.putParcelableArrayList(Constants.stepList, (ArrayList<? extends Parcelable>)steps );
+        startStepActivity(b);
+        Global.setgId(recipeId);
+    }
+
+}

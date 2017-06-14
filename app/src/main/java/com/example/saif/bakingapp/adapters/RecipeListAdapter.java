@@ -16,33 +16,29 @@ import com.bumptech.glide.Glide;
 import com.example.saif.bakingapp.IngredientsListActivity;
 import com.example.saif.bakingapp.R;
 import com.example.saif.bakingapp.callbacks.IngredientCallback;
+import com.example.saif.bakingapp.callbacks.StepCallback;
 import com.example.saif.bakingapp.model.Ingredient;
 import com.example.saif.bakingapp.model.Recipe;
 
 import java.util.List;
 
 /**
- * Created by Mosaad on 18/05/2017.
+ * Created by Saif on 18/05/2017.
  */
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.ViewHolder> {
     List<Recipe> recipes;
     Context mContext;
     IngredientCallback mCallback;
+    StepCallback mStepCallback;
 
-    onRecipeClick mClick;
-
-    public RecipeListAdapter(IngredientCallback callback){
-        mCallback = callback;
-    }
-    public RecipeListAdapter(Context context,List<Recipe> recipeList,IngredientCallback callback){
+    public RecipeListAdapter(Context context,List<Recipe> recipeList,IngredientCallback callback,StepCallback stepCallback){
         mContext =context;
         recipes = recipeList;
         mCallback = callback;
+        mStepCallback = stepCallback;
     }
-    public interface onRecipeClick{
-        void onClik(int position);
-    }
+
 
         @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -62,6 +58,12 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
 
         holder.recipeName.setText(title);
 
+        holder.stepsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mStepCallback.getStepBtn(recipes.get(position).getId());
+            }
+        });
         holder.ingredBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

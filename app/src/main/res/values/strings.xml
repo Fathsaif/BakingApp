@@ -6,4 +6,6 @@
     <string name="ingredient">Ingredient:</string>
     <string name="quantity">Quantity:</string>
     <string name="measure">Measure:</string>
+    <string name="next_button">Next</string>
+    <string name="previous_button">Previous</string>
 </resources>

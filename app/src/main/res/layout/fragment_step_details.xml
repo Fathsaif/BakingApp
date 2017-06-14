@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/exo_player"
+        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        />
+<TextView
+    android:id="@+id/stepNumber"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/default_16"
+    android:text="1"
+    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/step_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is Recipe step for nutella pie"
+        style="@android:style/TextAppearance.Widget.TextView"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/default_24"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|bottom"
+        android:layout_marginTop="@dimen/default_63"
+        android:weightSum="4"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/prev_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/default_16"
+            android:text="@string/previous_button"
+            android:onClick="onClickPrev"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:background="@color/cardview_dark_background"
+            android:layout_marginRight="@dimen/default_2"
+            android:drawableLeft="@drawable/prev_icn"
+            android:padding="@dimen/default_16"
+            android:layout_weight="2"
+            android:gravity="left"
+            />
+
+        <Button
+            android:id="@+id/next_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next_button"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="@dimen/default_2"
+            android:onClick="onClickNext"
+            android:textAlignment="center"
+            android:drawablePadding="@dimen/default_16"
+            android:layout_weight="2"
+            android:gravity="right"
+            android:padding="@dimen/default_16"
+            android:background="@color/cardview_dark_background"
+            android:drawableRight="@drawable/next_icn"
+            />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/step_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+</LinearLayout>
+</ScrollView>

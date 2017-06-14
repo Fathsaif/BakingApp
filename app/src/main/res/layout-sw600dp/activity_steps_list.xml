@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/two_pane"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="4">
+    <FrameLayout
+        android:id="@+id/steps_list_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:layout = "@layout/fragment_steps_list"
+        android:name="com.example.saif.bakingapp.StepsListFragment"
+        />
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"/>
+
+    <FrameLayout
+        android:id="@+id/step_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="2">
+
+    </FrameLayout>
+</LinearLayout>
