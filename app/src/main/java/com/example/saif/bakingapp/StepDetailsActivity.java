@@ -17,8 +17,10 @@ public class StepDetailsActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_details);
-        StepDetailsFragment stepDetailsFragment = new StepDetailsFragment();
-        fragmentManager =getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.step_container,stepDetailsFragment);
+        if (savedInstanceState==null) {
+            StepDetailsFragment stepDetailsFragment = new StepDetailsFragment();
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().add(R.id.step_container, stepDetailsFragment);
+        }
     }
 }

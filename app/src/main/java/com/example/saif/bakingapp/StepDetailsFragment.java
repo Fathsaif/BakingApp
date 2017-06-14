@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.saif.bakingapp.Utils.Constants;
+import com.example.saif.bakingapp.Utils.Global;
 import com.example.saif.bakingapp.callbacks.StepDetailsCallback;
 import com.example.saif.bakingapp.model.Step;
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -63,6 +64,7 @@ public class StepDetailsFragment extends Fragment implements ExoPlayer.EventList
     private PlaybackStateCompat.Builder mStateBuilder;
     String stepDesc, videoUrl;
     List<Step> mSteps;
+    boolean flag=false;
     Long stepNumber;
     private int mListIndex;
     @BindView(R.id.prev_btn)Button prevBtn;
@@ -78,15 +80,20 @@ public class StepDetailsFragment extends Fragment implements ExoPlayer.EventList
         Bundle b = new Bundle();
         b = getActivity().getIntent().getExtras();
 
-        if (b != null) {
+        if (b!=null&&savedInstanceState==null) {
             mSteps = b.getParcelableArrayList(Constants.stepList);
             int position = b.getInt(Constants.stepId);
+            if (position== Global.getgId()){
             setmListIndex(position);
-            Toast.makeText(getContext(),"b != null",Toast.LENGTH_LONG).show();
-        }
+        }}
         if (savedInstanceState != null){
-           // mListIndex =   savedInstanceState.getInt(Constants.position);
+
+            mListIndex =   savedInstanceState.getInt("w");
+            setmListIndex(mListIndex);
+            Toast.makeText(getActivity(),"instamce != " + mListIndex,Toast.LENGTH_LONG).show();
         }
+        Toast.makeText(getActivity(),"after " + getmListIndex(),Toast.LENGTH_LONG).show();
+
         Step step = mSteps.get(getmListIndex());
         stepDesc = step.getDescription();
         videoUrl = step.getVideoURL();
@@ -99,7 +106,6 @@ public class StepDetailsFragment extends Fragment implements ExoPlayer.EventList
                 releasePlayer();
                 if (mListIndex>0){
                     mListIndex--;
-                    Toast.makeText(getContext(),"size = " +mSteps.size(),Toast.LENGTH_LONG).show();
                 }
                 Step step = mSteps.get(mListIndex);
                 stepDesc = step.getDescription();
@@ -132,7 +138,6 @@ public class StepDetailsFragment extends Fragment implements ExoPlayer.EventList
         });
         initializeMediaSession();
         initializePlayer(videoUrl);
-        Toast.makeText(getContext(),"size = " + getmListIndex(),Toast.LENGTH_LONG).show();
 
         return rootView;
     }
@@ -154,6 +159,8 @@ public class StepDetailsFragment extends Fragment implements ExoPlayer.EventList
             mExoPlayer.setPlayWhenReady(true);
         }
     }
+
+
 
     private void initializeMediaSession() {
         mMediaSession = new MediaSessionCompat(getContext(), TAG);
@@ -278,6 +285,8 @@ public StepDetailsFragment(){
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(Constants.position,mListIndex);
+        outState.putInt("w",mListIndex);
+        Toast.makeText(getActivity(),"save instance = " + mListIndex,Toast.LENGTH_LONG).show();
+
     }
 }

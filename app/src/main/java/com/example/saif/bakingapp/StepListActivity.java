@@ -45,9 +45,9 @@ public class StepListActivity extends AppCompatActivity implements StepDetailsCa
            // next.setVisibility(View.INVISIBLE);
             Button prev = (Button) findViewById(R.id.prev_btn);
             //prev.setVisibility(View.INVISIBLE);
+            if (savedInstanceState==null){
             StepDetailsFragment stepDetailsFragment = new StepDetailsFragment();
-            fragmentManager.beginTransaction().replace(R.id.step_container,stepDetailsFragment).commit();
-
+            fragmentManager.beginTransaction().replace(R.id.step_container,stepDetailsFragment).commit();}
 
         }
         else {
@@ -55,6 +55,7 @@ public class StepListActivity extends AppCompatActivity implements StepDetailsCa
         }
 
         StepsListFragment stepsListFragment = new StepsListFragment();
+
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.steps_list_container,stepsListFragment).commit();
 
@@ -62,17 +63,21 @@ public class StepListActivity extends AppCompatActivity implements StepDetailsCa
     @Override
     public void onStepClicked(int Position, List<Step> steps) {
         if (mTwoPane){
-            Toast.makeText(getApplicationContext(),"step clicked" + Position,Toast.LENGTH_LONG).show();
 
-            StepDetailsFragment stepDetailsFragment = new StepDetailsFragment(Position);
+            StepDetailsFragment stepDetailsFragment = new StepDetailsFragment();
             stepDetailsFragment.setmListIndex(Position);
+            stepDetailsFragment.setRetainInstance(true);
+
             getSupportFragmentManager().beginTransaction().replace(R.id.step_container,stepDetailsFragment).commit();
+
         }
         else {
         Bundle b = new Bundle();
         b.putParcelableArrayList(Constants.stepList, (ArrayList<? extends Parcelable>) steps);
         b.putInt(stepId,Position );
-        NavigationUtil.startStepDetails(this,b);}
+        NavigationUtil.startStepDetails(this,b);
+
+        }
     }
 
 
