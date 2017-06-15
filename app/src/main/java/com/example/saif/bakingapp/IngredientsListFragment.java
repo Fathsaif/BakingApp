@@ -57,20 +57,13 @@ public class IngredientsListFragment extends Fragment{
 
     }
     public List<Ingredient> getIngredients( ){
-        int i = new Select().from(Ingredient.class)
-                .execute().size();
+
       List<Ingredient> ingredientList =  new Select().from(Ingredient.class)
                  .where("Recipe = ?", Global.getgId())
                 .execute();
-        Toast.makeText(getContext(),i+" ;",Toast.LENGTH_LONG).show();
         return ingredientList;
     }
-    public void sendDatatoWidget(){
-        Intent i = new Intent(getActivity(),IngredientWidgetProvider.class);
-        i.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        i.putParcelableArrayListExtra("w", (ArrayList<? extends Parcelable>) getIngredients());
-        getContext().sendBroadcast(i);
-    }
+
 
 
 }

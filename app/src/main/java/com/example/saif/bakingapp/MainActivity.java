@@ -1,5 +1,6 @@
 package com.example.saif.bakingapp;
 
+import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
@@ -50,15 +51,12 @@ public class MainActivity extends AppCompatActivity implements IngredientCallbac
                 if (new Select().from(Recipe.class).execute().size()==0) {
                     for (Recipe recipe : recipes) {
                         recipe.save();
-                        Toast.makeText(getApplicationContext(), "sql = "+recipe.getId(), Toast.LENGTH_LONG).show();
 
                         for (Ingredient ingredient : recipe.getIngredients()) {
-                            Toast.makeText(getApplicationContext(), "ingred = " +ingredient.getId(), Toast.LENGTH_LONG).show();
                             ingredient.recipe = recipe;
                             ingredient.save();
                         }
                         for (Step step : recipe.getSteps()) {
-                            Toast.makeText(getApplicationContext(), "step = " +step.getId() , Toast.LENGTH_LONG).show();
                             step.recipe = recipe;
                             step.save();
                         }
@@ -88,10 +86,15 @@ public class MainActivity extends AppCompatActivity implements IngredientCallbac
         startIngredientActivity();
 
     }
-
+    public void sendDatatoWidget(){
+        Intent i = new Intent(this,IngredientWidgetProvider.class);
+        i.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        sendBroadcast(i);
+    }
     @Override
     public void getIngredientBtn(Long recipeId) {
         Global.setgId(recipeId);
+        sendDatatoWidget();
     }
 
     @Override

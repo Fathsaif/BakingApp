@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment
+<RelativeLayout
+    android:id="@+id/main"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <FrameLayout
+        android:id="@+id/main_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/failed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/failed_connection"
+        android:layout_gravity="center"
+        android:visibility="invisible"/>
+<fragment
     xmlns:tools="http://schemas.android.com/tools"
     tools:layout = "@layout/fragment_main"
     android:name="com.example.saif.bakingapp.MainFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
+
 </fragment>
+    </FrameLayout>
+</RelativeLayout>
