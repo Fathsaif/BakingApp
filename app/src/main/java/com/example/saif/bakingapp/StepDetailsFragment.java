@@ -160,7 +160,11 @@ public class StepDetailsFragment extends Fragment implements ExoPlayer.EventList
         }
     }
 
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        releasePlayer();
+    }
 
     private void initializeMediaSession() {
         mMediaSession = new MediaSessionCompat(getContext(), TAG);
@@ -195,11 +199,6 @@ public class StepDetailsFragment extends Fragment implements ExoPlayer.EventList
         mMediaSession.setActive(false);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        releasePlayer();
-    }
 
     @Override
     public void onTimelineChanged(Timeline timeline, Object manifest) {

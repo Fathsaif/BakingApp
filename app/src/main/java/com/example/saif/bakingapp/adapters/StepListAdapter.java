@@ -86,7 +86,6 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(mContext,getAdapterPosition()+"",Toast.LENGTH_LONG);
 
             mStepDetails.onStepClicked( getAdapterPosition(),mSteps);
 
@@ -97,15 +96,4 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    private Bitmap getimage (String url){
-        FFmpegMediaMetadataRetriever mmr = new FFmpegMediaMetadataRetriever();
-        mmr.setDataSource(url);
-        mmr.extractMetadata(FFmpegMediaMetadataRetriever.METADATA_KEY_ALBUM);
-        mmr.extractMetadata(FFmpegMediaMetadataRetriever.METADATA_KEY_ARTIST);
-        Bitmap b = mmr.getFrameAtTime(2000000, FFmpegMediaMetadataRetriever.OPTION_CLOSEST); // frame at 2 seconds
-        byte [] artwork = mmr.getEmbeddedPicture();
-
-        mmr.release();
-        return b;
-    }
-}
+   }

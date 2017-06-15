@@ -5,6 +5,8 @@ import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activeandroid.query.Select;
@@ -20,6 +22,8 @@ import com.example.saif.bakingapp.rest.ApiClient;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,14 +31,12 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements IngredientCallback,StepCallback {
     FragmentManager fragmentManager;
     private Call<List<Recipe>> recipesCall;
-
-    int cast ( Long i){
-        return (int)(long)i;
-    }
+    @BindView(R.id.failed)TextView errorMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         fragmentManager = getSupportFragmentManager();
         MainFragment mainFragment = new MainFragment();
         fragmentManager.beginTransaction()
@@ -60,14 +62,13 @@ public class MainActivity extends AppCompatActivity implements IngredientCallbac
                             step.recipe = recipe;
                             step.save();
                         }
-
                         }
                 }
             }
 
             @Override
             public void onFailure(Call<List<Recipe>> call, Throwable t) {
-
+                errorMessage.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -85,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements IngredientCallbac
     @Override
     public void startActivity() {
         startIngredientActivity();
-        Toast.makeText(getApplicationContext(),"main",Toast.LENGTH_LONG).show();
 
     }
 
