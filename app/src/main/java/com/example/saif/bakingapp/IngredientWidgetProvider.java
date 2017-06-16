@@ -24,26 +24,29 @@ public class IngredientWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        for (int i=0; i<appWidgetIds.length; i++) {
 
-        for (int i = 0; i < appWidgetIds.length; i++) {
+            Intent svcIntent=new Intent(context, ListWidgetServices.class);
+            svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[i]);
+            svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
-
-            RemoteViews rv = new RemoteViews(context.getPackageName(),
+            RemoteViews widget=new RemoteViews(context.getPackageName(),
                     R.layout.ingredient_widget);
-            Toast.makeText(context,"update",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(context, ListWidgetServices.class);
 
-            rv.setRemoteAdapter(appWidgetIds[i] , R.id.widget_ingredient_list, intent);
-           Intent startActivityIntent = new Intent(context,MainActivity.class);
+            widget.setRemoteAdapter(appWidgetIds[i], R.id.widget_ingredient_list,
+                    svcIntent);
 
-            PendingIntent startActivityPendingIntent = PendingIntent.getActivity(context, 0, startActivityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            Intent clickIntent=new Intent(context, IngredientsListActivity.class);
+            PendingIntent clickPI=PendingIntent
+                    .getActivity(context, 0,
+                            clickIntent,
+                            PendingIntent.FLAG_UPDATE_CURRENT);
 
-            rv.setPendingIntentTemplate(R.id.widget_ingredient_list, startActivityPendingIntent);
+            widget.setPendingIntentTemplate(R.id.widget_ingredient_list, clickPI);
 
-            rv.setEmptyView(R.id.widget_ingredient_list, R.id.empty_view);
-            appWidgetManager.updateAppWidget(appWidgetIds[i], rv);
-
+            appWidgetManager.updateAppWidget(appWidgetIds[i], widget);
         }
+
         super.onUpdate(context, appWidgetManager, appWidgetIds);
 
     }

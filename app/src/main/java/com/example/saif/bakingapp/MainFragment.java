@@ -54,6 +54,7 @@ public class MainFragment extends Fragment{
         mListAdapter = new RecipeListAdapter(getActivity(),mRecipes, (IngredientCallback) getActivity(), (StepCallback) getActivity());
         recyclerView.setAdapter(mListAdapter);
         mListAdapter.setRecipes(getmRecipes());
+        recyclerView.getAdapter().notifyDataSetChanged();
         return rootView;
 
     }

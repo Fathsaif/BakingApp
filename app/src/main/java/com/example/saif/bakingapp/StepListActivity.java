@@ -55,7 +55,7 @@ public class StepListActivity extends AppCompatActivity implements StepDetailsCa
         }
 
         StepsListFragment stepsListFragment = new StepsListFragment();
-
+        stepsListFragment.setRetainInstance(true);
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.steps_list_container,stepsListFragment).commit();
 

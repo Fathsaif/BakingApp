@@ -62,6 +62,8 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public RemoteViews getViewAt(int position) {
+        Toast.makeText(mContext,"data",Toast.LENGTH_SHORT).show();
+
         RemoteViews row=new RemoteViews(mContext.getPackageName(),
                 R.layout.ingredient_item);
         Ingredient ingredient = ingredientList.get(position);

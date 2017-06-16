@@ -83,17 +83,16 @@ public class StepDetailsFragment extends Fragment implements ExoPlayer.EventList
         if (b!=null&&savedInstanceState==null) {
             mSteps = b.getParcelableArrayList(Constants.stepList);
             int position = b.getInt(Constants.stepId);
-            if (position== Global.getgId()){
+            if (position!=0)
             setmListIndex(position);
-        }}
+
+        }
         if (savedInstanceState != null){
 
             mListIndex =   savedInstanceState.getInt("w");
             setmListIndex(mListIndex);
-            Toast.makeText(getActivity(),"instamce != " + mListIndex,Toast.LENGTH_LONG).show();
         }
-        Toast.makeText(getActivity(),"after " + getmListIndex(),Toast.LENGTH_LONG).show();
-
+        mSteps = b.getParcelableArrayList(Constants.stepList);
         Step step = mSteps.get(getmListIndex());
         stepDesc = step.getDescription();
         videoUrl = step.getVideoURL();

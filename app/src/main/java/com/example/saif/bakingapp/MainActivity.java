@@ -61,7 +61,10 @@ public class MainActivity extends AppCompatActivity implements IngredientCallbac
                             step.save();
                         }
                         }
+                    finish();
+                    startActivity(getIntent());
                 }
+
             }
 
             @Override

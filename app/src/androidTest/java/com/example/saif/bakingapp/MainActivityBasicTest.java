@@ -43,10 +43,20 @@ public class MainActivityBasicTest {
 
     @Test
     public void buttonsClickable() {
-        onView(withId(R.id.recipes_list)).perform(
+        onData(withId(R.id.ingredients_btn))
+                .inAdapterView(withId(R.id.recipes_list))
+                .atPosition(0)
+                .perform(click());
+        onData(withId(R.id.steps_btn))
+                .inAdapterView(withId(R.id.recipes_list))
+                .atPosition(0)
+                .perform(click());
+
+        /*onView(withId(R.id.recipes_list)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(0, MyViewAction.clickChildViewWithId(R.id.ingredients_btn)));
         onView(withId(R.id.recipes_list)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(0, MyViewAction.clickChildViewWithId(R.id.steps_btn)));
+        */
                   }
     @Test
 public void isDisplayed(){
