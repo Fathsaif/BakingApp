@@ -45,7 +45,6 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
         ingredientList =  new Select().from(Ingredient.class)
                 .where("Recipe = ?", Global.getgId())
                 .execute();
-        Toast.makeText(mContext,""+ ingredientList.size(),Toast.LENGTH_SHORT).show();
 
     }
 
@@ -62,7 +61,6 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public RemoteViews getViewAt(int position) {
-        Toast.makeText(mContext,"data",Toast.LENGTH_SHORT).show();
 
         RemoteViews row=new RemoteViews(mContext.getPackageName(),
                 R.layout.ingredient_item);

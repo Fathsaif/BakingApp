@@ -13,5 +13,5 @@ public class Global {
         gId = Id;
     }
 
-    public static Long gId= Long.valueOf(1);
+    public static Long gId= Long.valueOf(0);
 }

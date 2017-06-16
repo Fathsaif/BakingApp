@@ -37,20 +37,21 @@ public class IngredientWidgetProvider extends AppWidgetProvider {
                     svcIntent);
 
             Intent clickIntent=new Intent(context, IngredientsListActivity.class);
+            clickIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
             PendingIntent clickPI=PendingIntent
-                    .getActivity(context, 0,
+                    .getActivity(context, 1,
                             clickIntent,
-                            PendingIntent.FLAG_UPDATE_CURRENT);
+                            0);
 
             widget.setPendingIntentTemplate(R.id.widget_ingredient_list, clickPI);
-
+            widget.setOnClickPendingIntent(R.id.frame_widget,clickPI);
             appWidgetManager.updateAppWidget(appWidgetIds[i], widget);
         }
 
         super.onUpdate(context, appWidgetManager, appWidgetIds);
 
     }
-
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -68,4 +69,5 @@ public class IngredientWidgetProvider extends AppWidgetProvider {
 
         }
     }
-}
+
+    }
