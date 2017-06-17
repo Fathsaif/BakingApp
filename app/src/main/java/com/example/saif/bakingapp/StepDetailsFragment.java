@@ -64,12 +64,10 @@ public class StepDetailsFragment extends Fragment implements ExoPlayer.EventList
     private PlaybackStateCompat.Builder mStateBuilder;
     String stepDesc, videoUrl;
     List<Step> mSteps;
-    boolean flag=false;
     Long stepNumber;
     private int mListIndex;
     @BindView(R.id.prev_btn)Button prevBtn;
     @BindView(R.id.next_btn)Button nextBtn;
-    @BindView(R.id.stepNumber)TextView stepNumberTv;
     @BindView(R.id.step_description)TextView stepDescTv;
     @BindView(R.id.exo_player)SimpleExoPlayerView mPlayerView;
     @Nullable
@@ -96,9 +94,7 @@ public class StepDetailsFragment extends Fragment implements ExoPlayer.EventList
         Step step = mSteps.get(getmListIndex());
         stepDesc = step.getDescription();
         videoUrl = step.getVideoURL();
-        stepNumber = step.getId();
         stepDescTv.setText(stepDesc);
-        stepNumberTv.setText(stepNumber+"");
         prevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +107,6 @@ public class StepDetailsFragment extends Fragment implements ExoPlayer.EventList
                 videoUrl = step.getVideoURL();
                 stepNumber = step.getId();
                 stepDescTv.setText(stepDesc);
-                stepNumberTv.setText(stepNumber+"");
                 initializeMediaSession();
                 initializePlayer(videoUrl);
             }
@@ -129,7 +124,6 @@ public class StepDetailsFragment extends Fragment implements ExoPlayer.EventList
                     videoUrl = step.getVideoURL();
                     stepNumber = step.getId();
                     stepDescTv.setText(stepDesc);
-                    stepNumberTv.setText(stepNumber+"");
                     initializeMediaSession();
                     initializePlayer(videoUrl);
 

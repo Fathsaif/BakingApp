@@ -33,7 +33,7 @@ public class IngredientWidgetProvider extends AppWidgetProvider {
             RemoteViews widget=new RemoteViews(context.getPackageName(),
                     R.layout.ingredient_widget);
 
-            widget.setRemoteAdapter(appWidgetIds[i], R.id.widget_ingredient_list,
+            widget.setRemoteAdapter( R.id.widget_ingredient_list,
                     svcIntent);
 
             Intent clickIntent=new Intent(context, IngredientsListActivity.class);
@@ -45,7 +45,6 @@ public class IngredientWidgetProvider extends AppWidgetProvider {
                             0);
 
             widget.setPendingIntentTemplate(R.id.widget_ingredient_list, clickPI);
-            widget.setOnClickPendingIntent(R.id.frame_widget,clickPI);
             appWidgetManager.updateAppWidget(appWidgetIds[i], widget);
         }
 

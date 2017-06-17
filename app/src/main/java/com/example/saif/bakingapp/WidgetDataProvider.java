@@ -80,8 +80,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
         fillInIntent.putExtra(Constants.quantity,q);
         fillInIntent.putExtras(extras);
         PendingIntent appPendingIntent = PendingIntent.getActivity(mContext, 0, fillInIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        row.setPendingIntentTemplate(R.id.widget_ingredient_list,appPendingIntent);
-
+      //  row.setPendingIntentTemplate(R.id.widget_ingredient_list,appPendingIntent);
 
         return row;
     }
@@ -93,7 +92,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public int getViewTypeCount() {
-        return 0;
+        return 1;
     }
 
     @Override
